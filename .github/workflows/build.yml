@@ -17,7 +17,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          sudo apt-get install -y node npm
+          sudo apt-get install -y nodejs npm
           npm install
 
       - name: Configure CMake
