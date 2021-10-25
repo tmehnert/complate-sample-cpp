@@ -2,6 +2,7 @@
 
 *- Sample project for using [complate-cpp](https://github.com/tmehnert/complate-cpp)*
 
+[![Build](https://github.com/tmehnert/complate-sample-cpp/actions/workflows/build.yml/badge.svg)](https://github.com/tmehnert/complate-sample-cpp/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ## User Guide
