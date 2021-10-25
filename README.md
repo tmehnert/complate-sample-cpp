@@ -19,7 +19,7 @@ see your changes right after refreshing your browser, with no need to restart th
 
 ```shell
 # Install dependencies
-sudo apt install -y build-essential git cmake npm
+sudo apt install -y build-essential git cmake nodejs npm
 
 # Clone repository
 git clone https://github.com/tmehnert/complate-sample-cpp.git
