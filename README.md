@@ -49,4 +49,4 @@ build/src/complate-sample
 
 ## License
 
-complate-cpp is Open Source software released under the [Apache 2.0 license](LICENSE).
+complate-sample-cpp is Open Source software released under the [Apache 2.0 license](LICENSE).
