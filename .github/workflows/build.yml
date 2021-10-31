@@ -8,9 +8,12 @@ on:
   schedule:
     - cron: '0 6 * * *'
 
+env:
+  CMAKE_BUILD_PARALLEL_LEVEL: 2
+
 jobs:
-  build:
-    name: Build
+  linux-build:
+    name: Linux
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +30,27 @@ jobs:
         run: npm run compile
 
       - name: Build
-        env:
-          CMAKE_BUILD_PARALLEL_LEVEL: 2
+        run: cmake --build ${{github.workspace}}/build
+
+  windows-build:
+    name: Windows
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          choco upgrade mingw -y --version=8.5.0 --no-progress --allow-downgrade
+          npm install
+
+      - name: Configure CMake
+        run: |
+          cmake -B ${{github.workspace}}/build `
+            -DBUILD_V8_RENDERER=off `
+            -G "MinGW Makefiles"
+
+      - name: Generate Views
+        run: npm run compile
+
+      - name: Build
         run: cmake --build ${{github.workspace}}/build
