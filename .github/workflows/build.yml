@@ -33,6 +33,31 @@ jobs:
       - name: Build
         run: cmake --build ${{github.workspace}}/build
 
+
+  macos-build:
+    name: macOS
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Generate Views
+        run: npm run compile
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DBUILD_V8_RENDERER=off
+
+      - name: Build
+        run: cmake --build build
+
+
   windows-build:
     name: Windows
     runs-on: windows-2019
