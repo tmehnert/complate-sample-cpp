@@ -36,31 +36,29 @@ jobs:
   windows-build:
     name: Windows
     runs-on: windows-2019
-    env:
-      mingw: 8.5.0
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - uses: actions/cache@v2
+      - uses: msys2/setup-msys2@v2
         with:
-          path: C:\ProgramData\chocolatey\lib\mingw
-          key: ${{runner.os}}-chocolatey-mingw-${{env.mingw}}
+          release: false
+          install: >-
+            mingw-w64-x86_64-ninja
 
       - name: Install Dependencies
-        run: |
-          choco upgrade mingw -y --version=${{env.mingw}} --no-progress --allow-downgrade
-          npm install
+        run: npm install
 
       - name: Configure CMake
+        shell: msys2 {0}
         run: |
-          cmake -B ${{github.workspace}}/build `
-            -DBUILD_V8_RENDERER=off `
-            -G "MinGW Makefiles"
+          cmake -B build \
+            -DBUILD_V8_RENDERER=off
 
       - name: Generate Views
         run: npm run compile
 
       - name: Build
-        run: cmake --build ${{github.workspace}}/build
+        shell: msys2 {0}
+        run: cmake --build build
