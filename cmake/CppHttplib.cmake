@@ -17,7 +17,7 @@ message("-- Fetching cpp-httplib...")
 FetchContent_Declare(
     cpp-httplib
     GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git
-    GIT_TAG v0.9.7
+    GIT_TAG v0.9.9
     GIT_SHALLOW 1
 )
 
